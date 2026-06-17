@@ -15,7 +15,7 @@
   ];
 
   programs.git = {
-    userName = "${userName}";
-    userEmail = "${userEmail}";
+    settings.user.name = "${userName}";
+    settings.user.email = "${userEmail}";
   };
 }

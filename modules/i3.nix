@@ -2,16 +2,15 @@
   # i3 related options
   environment.pathsToLink = ["/libexec"]; # links /libexec from derivations to /run/current-system/sw
   services.displayManager.defaultSession = "none+i3";
+  services.displayManager = {
+    gdm.enable = true;
+    lightdm.enable = false;
+  };
   services.xserver = {
     enable = true;
 
     desktopManager = {
       xterm.enable = false;
-    };
-
-    displayManager = {
-      lightdm.enable = false;
-      gdm.enable = true;
     };
 
     windowManager.i3 = {
@@ -23,7 +22,7 @@
         i3lock # default i3 screen locker
         xautolock # lock screen after some time
         i3status # provide information to i3bar
-        i3-gaps # i3 with gaps
+        i3
         picom # transparency and shadows
         feh # set wallpaper
         acpi # battery information
