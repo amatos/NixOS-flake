@@ -15,6 +15,8 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "xadres"; # Define your hostname.
+  # Use the latest kernel packages.
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Configure network connections interactively with nmcli or nmtui.
   networking.networkmanager.enable = true;
