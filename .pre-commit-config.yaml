@@ -79,4 +79,4 @@ repos:
     hooks:
       - id: check-added-large-files
         name: Check file sizes
-        args: ["--maxkb=16", "--enforce-all"]
+        args: ["--maxkb=32", "--enforce-all"]

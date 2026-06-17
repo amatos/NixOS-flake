@@ -17,24 +17,51 @@
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
     nixosConfigurations = {
-      xadres = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs; };
-        modules = [
-          # Import the previous configuration.nix we used,
-          # so the old configuration file still takes effect
-          ./configuration.nix
+      gammu = let
+        username = "alberth";
+        userName = "Alberth Matos";
+        userEmail = "alberth@matos.cc";
+        specialArgs = {inherit username userName userEmail;};
+      in
+      nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
+        system = "x86_64-linux";
 
-          # make home-manager as a module of nixos
-          # so that home-manager configuration will be deployed automatically
-          # when executing `nixos-rebuild switch`
+        modules = [
+          ./hosts/gammu
+          ./users/${username}/nixos.nix
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.alberth = import ./home.nix;
+            home-manager.extraSpecialArgs = inputs // specialArgs;
+            home-manager.users.${username} = import ./users/${username}/home.nix;
+          }
+        ];
+      };
 
-            # Optionally, use home-manager.extraSpecialArgs to pass arguments to home.nix
+      xadrez = let
+      username = "alberth";
+      userName = "Alberth Matos";
+      userEmail = "alberth@matos.cc";
+        specialArgs = {inherit username userName userEmail;};
+      in
+      nixpkgs.lib.nixosSystem {
+        inherit specialArgs;
+
+        modules = [
+          ./hosts/xadrez
+          ./users/${username}/nixos.nix
+
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.extraSpecialArgs = inputs // specialArgs;
+            home-manager.users.${username} = import ./users/${username}/home.nix;
           }
         ];
       };
