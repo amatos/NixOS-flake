@@ -84,6 +84,9 @@
     neovim
     git
     zsh
+    tealdeer
+    bat
+    eza
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
