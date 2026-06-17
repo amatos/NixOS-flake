@@ -4,7 +4,6 @@
   services.displayManager.defaultSession = "none+i3";
   services.displayManager = {
     gdm.enable = true;
-    lightdm.enable = false;
   };
   services.xserver = {
     enable = true;
