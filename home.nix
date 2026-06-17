@@ -119,6 +119,19 @@
     };
   };
 
+  programs.tealdeer = {
+    enable = true;
+    settings = {
+      display = {
+        compact = false;
+        use_pager = true;
+      };
+      updates = {
+        auto_update = true;
+      };
+    };
+  };
+
   # alacritty - a cross-platform, GPU-accelerated terminal emulator
   # programs.alacritty = {
   #   enable = true;
