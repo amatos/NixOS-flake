@@ -127,7 +127,7 @@
     # print screen key is also bound to this tool in i3 config
     scrot
     fastfetch
-    xfce.thunar # xfce4's file manager
+    thunar # xfce4's file manager
     ghostty # terminal file manager
   ];
 
