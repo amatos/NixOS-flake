@@ -62,6 +62,7 @@
     description = "Alberth Matos";
     isNormalUser = true;
     extraGroups = [ "networkmanager" "wheel" ]; # Enable ‘sudo’ for the user.
+    shell = pkgs.zsh;
     openssh.authorizedKeys.keys = [
             "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILfxNl1S0Fvzh2aOAG6FuIwB96eqnUqY1nl2p2jSnTOD"
         ];
@@ -89,6 +90,11 @@
     enable = true;
     enableSSHSupport = true;
   };
+
+  programs.zsh.enable = true;
+
+  # Optional: To make Zsh the default for ALL new users globally
+  users.defaultUserShell = pkgs.zsh;
 
   # List services that you want to enable:
 
