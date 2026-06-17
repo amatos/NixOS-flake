@@ -13,6 +13,10 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    catppuccin-bat = {
+          url = "github:catppuccin/bat";
+          flake = false;
+        };
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs: {
