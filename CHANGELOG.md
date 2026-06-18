@@ -17,6 +17,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `flake.nix`: added `nixpkgs-darwin` and `darwin` (nix-darwin) flake inputs,
   and a `darwinConfigurations.codex` output for an initial nix-darwin host
   skeleton
+- `hosts/macos/codex/default.nix`: populated the previously empty nix-darwin
+  host skeleton with `system.stateVersion = 6`
 
 ### Changed
 
@@ -39,6 +41,22 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `modules/` moved to `modules/linux/`; updated `hosts/linux/gammu/default.nix`
   and `hosts/linux/xadrez/default.nix` imports of `system.nix`, `no-gui.nix`,
   and `i3.nix` to `../../../modules/linux/...`
+- `home/` split into `home/common/` (cross-platform config: shell, atuin,
+  starship, git, generic CLI packages/programs) and `home/linux/` (Linux-only
+  config: i3, rofi, fcitx5, browsers, media, xdg). `home/programs/common.nix`
+  was divided between `home/common/programs/common.nix` (generic packages and
+  `programs.*` options) and `home/linux/programs/common.nix` (Linux-only
+  packages and `services.syncthing`/`services.udiskie`)
+- `users/alberth/home.nix`: updated imports to the new `home/common` and
+  `home/linux/{fcitx5,i3,programs,rofi}` paths after the `home/` split
+- `home/linux/programs/default.nix`: removed a dangling `./git.nix` import
+  left over from the `home/` split — git config now lives under
+  `home/common/programs/`, already pulled in via the `home/common` import
+- `flake.nix`: fixed `darwinConfigurations.codex` module path from
+  `./hosts/codex` to `./hosts/macos/codex` to match the host's new location
+- `home/common/shell/core.nix`: made `home.homeDirectory` platform-aware
+  (`/Users/${username}` on Darwin via `pkgs.stdenv.isDarwin`, otherwise
+  `/home/${username}`) now that this module is shared with the nix-darwin host
 
 ## [2026.06.18] - 2026-06-18
 

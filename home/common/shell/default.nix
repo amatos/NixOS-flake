@@ -6,7 +6,9 @@ let
 in
 {
   imports = [
+    ./atuin.nix
     ./common.nix
+    ./core.nix
     ./starship.nix
   ];
 

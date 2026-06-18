@@ -44,7 +44,7 @@
         codex = darwin.lib.darwinSystem {
           system = "aarch64-darwin";
           modules = [
-            ./hosts/codex
+            ./hosts/macos/codex
           ];
         };
       };

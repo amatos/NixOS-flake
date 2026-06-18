@@ -1,5 +1,4 @@
 {
-  lib,
   pkgs,
   catppuccin-bat,
   ...
@@ -15,32 +14,6 @@
     ripgrep
     yq-go # https://github.com/mikefarah/yq
     htop
-
-    # misc
-    libnotify
-    wineWow64Packages.wayland
-    xdg-utils
-    graphviz
-
-    # productivity
-    # obsidian
-
-    # IDE
-    # insomnia
-
-    # cloud native
-    # docker-compose
-    # kubectl
-
-    # nodejs
-    # nodePackages.npm
-    # nodePackages.pnpm
-    # yarn
-
-    # db related
-    # dbeaver-bin
-    # mycli
-    # pgcli
   ];
 
   programs = {
@@ -80,12 +53,5 @@
         "--exact"
       ];
     };
-  };
-
-  services = {
-    syncthing.enable = true;
-
-    # auto mount usb drives
-    udiskie.enable = true;
   };
 }

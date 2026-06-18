@@ -12,13 +12,11 @@
   ##################################################################################################################
 
   imports = [
-    ../../home/core.nix
-    ../../home/fcitx5
-    ../../home/i3
-    ../../home/programs
-    ../../home/rofi
-    ../../home/shell
-    ../../home/shell/atuin.nix
+    ../../home/common
+    ../../home/linux/fcitx5
+    ../../home/linux/i3
+    ../../home/linux/programs
+    ../../home/linux/rofi
   ];
 
   programs.fish.enable = true;
