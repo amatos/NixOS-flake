@@ -17,6 +17,12 @@
       url = "github:catppuccin/bat";
       flake = false;
     };
+    # nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-darwin.url = "github:nixos/nixpkgs/nixpkgs-26.05-darwin";
+    darwin = {
+      url = "github:lnl7/nix-darwin/nix-darwin-26.05";
+      inputs.nixpkgs.follows = "nixpkgs-darwin";
+    };
   };
 
   outputs =
@@ -24,9 +30,24 @@
       self,
       nixpkgs,
       home-manager,
+      darwin,
       ...
     }@inputs:
+    let
+      username = "alberth";
+      userName = "Alberth Matos";
+      userEmail = "alberth@matos.cc";
+      specialArgs = { inherit username userName userEmail; };
+    in
     {
+      darwinConfigurations = {
+        codex = darwin.lib.darwinSystem {
+          system = "aarch64-darwin";
+          modules = [
+            ./hosts/codex
+          ];
+        };
+      };
       nixosConfigurations = {
         gammu = nixpkgs.lib.nixosSystem {
           inherit specialArgs;

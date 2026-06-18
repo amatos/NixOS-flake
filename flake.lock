@@ -16,6 +16,27 @@
         "type": "github"
       }
     },
+    "darwin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs-darwin"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781772065,
+        "narHash": "sha256-xIbRSwDB1GBAUsWsQZUjudGfAGQt3BOpsWaO/ugVa4w=",
+        "owner": "lnl7",
+        "repo": "nix-darwin",
+        "rev": "adda04f0bf4819575b1978c2f8d78401b3c2be12",
+        "type": "github"
+      },
+      "original": {
+        "owner": "lnl7",
+        "ref": "nix-darwin-26.05",
+        "repo": "nix-darwin",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -53,11 +74,29 @@
         "type": "github"
       }
     },
+    "nixpkgs-darwin": {
+      "locked": {
+        "lastModified": 1781472460,
+        "narHash": "sha256-dqwpb1o0xIwb1rv3PPbpY7RBm8heFiOLAubszNLBefc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "8c14fa3ccacddaec887134e523083b63c8ea57ac",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixpkgs-26.05-darwin",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin-bat": "catppuccin-bat",
+        "darwin": "darwin",
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "nixpkgs-darwin": "nixpkgs-darwin"
       }
     }
   },

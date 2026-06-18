@@ -14,6 +14,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `home/shell/atuin.nix`: enable `programs.fish` and `programs.zsh` so that
   `enableFishIntegration` and `enableZshIntegration` inject atuin init into
   shell startup files (later moved to `users/alberth/home.nix`)
+- `flake.nix`: added `nixpkgs-darwin` and `darwin` (nix-darwin) flake inputs,
+  and a `darwinConfigurations.codex` output for an initial nix-darwin host
+  skeleton
 
 ### Changed
 
