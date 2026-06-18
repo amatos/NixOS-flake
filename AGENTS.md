@@ -1,4 +1,4 @@
-# CLAUDE.md
+# AGENTS.md
 
 This file provides guidance to LLM agents when working with code in this repository.
 
@@ -12,6 +12,22 @@ modular configurations in `modules/`.
 
 Home-manager configuration is stored in `users/`, which reference modular
 configurations in `home/`.
+
+## Where changes belong
+
+- **`users/<name>/`** — user-specific configuration (e.g. which modules a user
+  imports, personal settings like name/email, shell choices). Changes that are
+  specific to a particular user live here.
+- **`home/`** — application-focused, reusable home-manager modules (e.g. atuin
+  settings, shell aliases, program configuration). These should be generic enough
+  to be imported by any user.
+- **`hosts/<hostname>/`** — host-specific NixOS configuration (e.g.
+  hardware-configuration.nix, host-level overrides). Changes that apply only to
+  a particular machine live here.
+- **`modules/`** — shared NixOS system modules reused across hosts.
+
+If it is unclear which of the above a change belongs to, **do not assume — ask
+before making the change**.
 
 ## Git commit messages
 
