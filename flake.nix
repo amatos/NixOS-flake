@@ -47,9 +47,9 @@
       };
 
       xadrez = let
-      username = "alberth";
-      userName = "Alberth Matos";
-      userEmail = "alberth@matos.cc";
+        username = "alberth";
+        userName = "Alberth Matos";
+        userEmail = "alberth@matos.cc";
         specialArgs = {inherit username userName userEmail;};
       in
       nixpkgs.lib.nixosSystem {
