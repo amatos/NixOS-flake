@@ -21,6 +21,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `AGENTS.md`: added "Where changes belong" section documenting the purpose of
   `users/`, `home/`, `hosts/`, and `modules/`, with an instruction to ask rather
   than assume when placement is unclear
+- `AGENTS.md`: strengthened changelog instructions — always update on every change,
+  and check git log for any previously unlogged commits when updating
 
 ## [2026.06.18] - 2026-06-18
 

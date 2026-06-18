@@ -46,9 +46,13 @@ what changed:
 ## Changelog
 
 `CHANGELOG.md` follows the [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) format.
-Update it whenever you make a change to the repository. Add entries under the `## [Unreleased]`
-section, using `### Added`, `### Changed`, `### Fixed`, or `### Removed` sub-headings as appropriate.
-Each entry should name the affected file and briefly explain what changed and why.
+Always update it whenever you make a change to the repository. Add entries under the
+`## [Unreleased]` section, using `### Added`, `### Changed`, `### Fixed`, or `### Removed`
+sub-headings as appropriate. Each entry should name the affected file and briefly explain
+what changed and why.
+
+Whenever updating the changelog, also check the git log for any committed changes that are
+not yet reflected in `CHANGELOG.md`, and add entries for those as well.
 
 When committing manually, use a tool like [commitizen](https://github.com/commitizen-tools/commitizen)
 (`cz commit`) to ensure commit messages and changelog entries stay consistent and useful.
