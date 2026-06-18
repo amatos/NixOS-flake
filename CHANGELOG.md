@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- `modules/linux/system.nix`: added `ghostty.terminfo` to `environment.systemPackages` to provide terminfo for `ghostty`
 - `users/alberth/nixos.nix`: set zsh as alberth's default login shell
   (`users.users.alberth.shell = pkgs.zsh`) and enable it at the system level
   (`programs.zsh.enable = true`) so it is listed in `/etc/shells`

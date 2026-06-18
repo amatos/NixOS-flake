@@ -98,6 +98,7 @@
     neovim
     sysstat
     lm_sensors # for `sensors` command
+    ghostty.terminfo # terminfo for `ghostty`
   ];
 
   services.power-profiles-daemon = {
