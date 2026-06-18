@@ -1,8 +1,5 @@
 { config, ... }:
 {
-  programs.fish.enable = true;
-  programs.zsh.enable = true;
-
   programs.atuin = {
     enable = true;
     enableFishIntegration = true;

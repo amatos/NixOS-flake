@@ -21,6 +21,9 @@
     ../../home/shell/atuin.nix
   ];
 
+  programs.fish.enable = true;
+  programs.zsh.enable = true;
+
   programs.git = {
     settings.user.name = "${userName}";
     settings.user.email = "${userEmail}";
