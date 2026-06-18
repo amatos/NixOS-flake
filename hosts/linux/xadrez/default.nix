@@ -8,6 +8,7 @@
   imports = [
     ../../../modules/linux/system.nix
     ../../../modules/linux/i3.nix
+    ../../../modules/common
 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix

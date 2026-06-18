@@ -1,0 +1,34 @@
+{
+  pkgs,
+  ...
+}:
+{
+  environment.systemPackages = with pkgs; [
+    bash
+    bash-completion
+    bat
+    btop
+    cowsay
+    curl
+    direnv
+    dos2unix
+    eza
+    fastfetch
+    fish
+    fortune
+    fzf
+    htop
+    httpie
+    lsd
+    neovim
+    pstree
+    ripgrep
+    tealdeer
+    tmux
+    wget
+    yazi
+    zoxide
+    zsh
+    zsh-completions
+  ];
+}

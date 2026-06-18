@@ -9,6 +9,7 @@
   imports = [
     ../../../modules/linux/system.nix
     ../../../modules/linux/no-gui.nix
+    ../../../modules/common
 
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
