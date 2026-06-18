@@ -28,56 +28,42 @@
     }@inputs:
     {
       nixosConfigurations = {
-        gammu =
-          let
-            username = "alberth";
-            userName = "Alberth Matos";
-            userEmail = "alberth@matos.cc";
-            specialArgs = { inherit username userName userEmail; };
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
-            system = "x86_64-linux";
+        gammu = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "x86_64-linux";
 
-            modules = [
-              ./hosts/gammu
-              ./users/${username}/nixos.nix
+          modules = [
+            ./hosts/linux/gammu
+            ./users/${username}/nixos.nix
 
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
 
-                home-manager.extraSpecialArgs = inputs // specialArgs;
-                home-manager.users.${username} = import ./users/${username}/home.nix;
-              }
-            ];
-          };
+              home-manager.extraSpecialArgs = inputs // specialArgs;
+              home-manager.users.${username} = import ./users/${username}/home.nix;
+            }
+          ];
+        };
+        xadrez = nixpkgs.lib.nixosSystem {
+          inherit specialArgs;
+          system = "aarch64-linux";
 
-        xadrez =
-          let
-            username = "alberth";
-            userName = "Alberth Matos";
-            userEmail = "alberth@matos.cc";
-            specialArgs = { inherit username userName userEmail; };
-          in
-          nixpkgs.lib.nixosSystem {
-            inherit specialArgs;
+          modules = [
+            ./hosts/linux/xadrez
+            ./users/${username}/nixos.nix
 
-            modules = [
-              ./hosts/xadrez
-              ./users/${username}/nixos.nix
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
 
-              home-manager.nixosModules.home-manager
-              {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-
-                home-manager.extraSpecialArgs = inputs // specialArgs;
-                home-manager.users.${username} = import ./users/${username}/home.nix;
-              }
-            ];
-          };
+              home-manager.extraSpecialArgs = inputs // specialArgs;
+              home-manager.users.${username} = import ./users/${username}/home.nix;
+            }
+          ];
+        };
       };
     };
 }

@@ -7,11 +7,12 @@ This file provides guidance to LLM agents when working with code in this reposit
 This repo represents a Nix flake configuration for my personal NixOS (26.05) and
 nix-darwin setups.
 
-Configuration for individual hosts are stored in `hosts/`, which reference
-modular configurations in `modules/`.
+Configuration for individual hosts are stored in `hosts/linux` and
+`hosts/darwin`, depending on the platform. Each subdirectory references modular
+configurations in `modules/common`, `modules/linux`, and `modules/darwin`.
 
 Home-manager configuration is stored in `users/`, which reference modular
-configurations in `home/`.
+configurations in `home/linux`, `home/common`, and `home/darwin`.
 
 ## Where changes belong
 

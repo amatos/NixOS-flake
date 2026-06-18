@@ -27,6 +27,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   than assume when placement is unclear
 - `AGENTS.md`: strengthened changelog instructions — always update on every change,
   and check git log for any previously unlogged commits when updating
+- `hosts/gammu/` moved to `hosts/linux/gammu/`; updated `flake.nix` module path
+  and fixed `hosts/linux/gammu/default.nix` relative imports of `modules/`
+  (now `../../../modules/...`) to account for the extra directory depth
+- `hosts/xadrez/` moved to `hosts/linux/xadrez/`; updated `flake.nix` module path
+  and fixed `hosts/linux/xadrez/default.nix` relative imports of `modules/`
+  (now `../../../modules/...`) to account for the extra directory depth
+- `modules/` moved to `modules/linux/`; updated `hosts/linux/gammu/default.nix`
+  and `hosts/linux/xadrez/default.nix` imports of `system.nix`, `no-gui.nix`,
+  and `i3.nix` to `../../../modules/linux/...`
 
 ## [2026.06.18] - 2026-06-18
 
