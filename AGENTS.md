@@ -5,7 +5,7 @@ This file provides guidance to LLM agents when working with code in this reposit
 ## What this is
 
 This repo represents a Nix flake configuration for my personal NixOS (26.05) and
-darwin-nix setups.
+nix-darwin setups.
 
 Configuration for individual hosts are stored in `hosts/`, which reference
 modular configurations in `modules/`.

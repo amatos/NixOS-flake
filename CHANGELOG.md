@@ -20,6 +20,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `users/alberth/home.nix`: moved `programs.fish.enable` and `programs.zsh.enable`
   here from `home/shell/atuin.nix` — shell choice is user-specific, not
   application-specific
+- `AGENTS.md`: fixed nix-darwin (was incorrectly reversed as `darwin-nix`)
 - `AGENTS.md`: fixed heading (was incorrectly titled `CLAUDE.md`)
 - `AGENTS.md`: added "Where changes belong" section documenting the purpose of
   `users/`, `home/`, `hosts/`, and `modules/`, with an instruction to ask rather
