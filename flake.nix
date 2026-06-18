@@ -14,61 +14,70 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     catppuccin-bat = {
-          url = "github:catppuccin/bat";
-          flake = false;
-        };
-  };
-
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {
-      gammu = let
-        username = "alberth";
-        userName = "Alberth Matos";
-        userEmail = "alberth@matos.cc";
-        specialArgs = {inherit username userName userEmail;};
-      in
-      nixpkgs.lib.nixosSystem {
-        inherit specialArgs;
-        system = "x86_64-linux";
-
-        modules = [
-          ./hosts/gammu
-          ./users/${username}/nixos.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.extraSpecialArgs = inputs // specialArgs;
-            home-manager.users.${username} = import ./users/${username}/home.nix;
-          }
-        ];
-      };
-
-      xadrez = let
-        username = "alberth";
-        userName = "Alberth Matos";
-        userEmail = "alberth@matos.cc";
-        specialArgs = {inherit username userName userEmail;};
-      in
-      nixpkgs.lib.nixosSystem {
-        inherit specialArgs;
-
-        modules = [
-          ./hosts/xadrez
-          ./users/${username}/nixos.nix
-
-          home-manager.nixosModules.home-manager
-          {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-
-            home-manager.extraSpecialArgs = inputs // specialArgs;
-            home-manager.users.${username} = import ./users/${username}/home.nix;
-          }
-        ];
-      };
+      url = "github:catppuccin/bat";
+      flake = false;
     };
   };
+
+  outputs =
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
+    {
+      nixosConfigurations = {
+        gammu =
+          let
+            username = "alberth";
+            userName = "Alberth Matos";
+            userEmail = "alberth@matos.cc";
+            specialArgs = { inherit username userName userEmail; };
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+            system = "x86_64-linux";
+
+            modules = [
+              ./hosts/gammu
+              ./users/${username}/nixos.nix
+
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.extraSpecialArgs = inputs // specialArgs;
+                home-manager.users.${username} = import ./users/${username}/home.nix;
+              }
+            ];
+          };
+
+        xadrez =
+          let
+            username = "alberth";
+            userName = "Alberth Matos";
+            userEmail = "alberth@matos.cc";
+            specialArgs = { inherit username userName userEmail; };
+          in
+          nixpkgs.lib.nixosSystem {
+            inherit specialArgs;
+
+            modules = [
+              ./hosts/xadrez
+              ./users/${username}/nixos.nix
+
+              home-manager.nixosModules.home-manager
+              {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+
+                home-manager.extraSpecialArgs = inputs // specialArgs;
+                home-manager.users.${username} = import ./users/${username}/home.nix;
+              }
+            ];
+          };
+      };
+    };
 }
