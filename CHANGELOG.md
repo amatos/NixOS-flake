@@ -8,6 +8,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- `users/alberth/nixos.nix`: set zsh as alberth's default login shell
+  (`users.users.alberth.shell = pkgs.zsh`) and enable it at the system level
+  (`programs.zsh.enable = true`) so it is listed in `/etc/shells`
 - `home/shell/atuin.nix`: enable `programs.fish` and `programs.zsh` so that
   `enableFishIntegration` and `enableZshIntegration` inject atuin init into
   shell startup files (later moved to `users/alberth/home.nix`)
