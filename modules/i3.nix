@@ -5,6 +5,7 @@
   services.displayManager = {
     gdm.enable = true;
   };
+
   services.xserver = {
     enable = true;
 
@@ -31,12 +32,18 @@
         xbacklight # control screen brightness
         xdpyinfo # get screen information
         sysstat # get system information
+        # minimal screen capture tool, used by i3 blur lock to take a screenshot
+        # print screen key is also bound to this tool in i3 config
+        scrot
+        thunar # xfce4's file manager
       ];
     };
 
     # Configure keymap in X11
     xkb.layout = "us";
   };
+
+  programs.dconf.enable = true;
 
   # thunar file manager(part of xfce) related options
   programs.thunar.plugins = with pkgs.xfce; [
