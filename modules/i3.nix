@@ -36,7 +36,6 @@
 
     # Configure keymap in X11
     xkb.layout = "us";
-    xkb.variant = "";
   };
 
   # thunar file manager(part of xfce) related options
@@ -46,4 +45,9 @@
   ];
   services.gvfs.enable = true; # Mount, trash, and other functionalities
   services.tumbler.enable = true; # Thumbnail support for images
+
+  services.xrdp = {
+    enable = true;
+    openFirewall = true;
+  };
 }
