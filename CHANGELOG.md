@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
+## [Unreleased]
+
+### Added
+
+- `home/shell/atuin.nix`: enable `programs.fish` and `programs.zsh` so that
+  `enableFishIntegration` and `enableZshIntegration` inject atuin init into
+  shell startup files (later moved to `users/alberth/home.nix`)
+
+### Changed
+
+- `users/alberth/home.nix`: moved `programs.fish.enable` and `programs.zsh.enable`
+  here from `home/shell/atuin.nix` — shell choice is user-specific, not
+  application-specific
+- `AGENTS.md`: fixed heading (was incorrectly titled `CLAUDE.md`)
+- `AGENTS.md`: added "Where changes belong" section documenting the purpose of
+  `users/`, `home/`, `hosts/`, and `modules/`, with an instruction to ask rather
+  than assume when placement is unclear
+
 ## [2026.06.18] - 2026-06-18
 
 ### Added
