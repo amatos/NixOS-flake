@@ -12,6 +12,7 @@
     ../../home/programs
     ../../home/rofi
     ../../home/shell
+    ../../home/shell/atuin.nix
   ];
 
   programs.git = {
