@@ -4,7 +4,8 @@
   username,
   userName,
   ...
-}: {
+}:
+{
   services.xserver.enable = false;
 
 }

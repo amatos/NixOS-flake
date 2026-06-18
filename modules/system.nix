@@ -4,25 +4,32 @@
   username,
   userName,
   ...
-}: {
+}:
+{
   # ============================= User related =============================
 
   # Define a user account.
   users.users.${username} = {
     isNormalUser = true;
     description = "${userName}";
-    extraGroups = ["networkmanager" "wheel"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     hashedPassword = "$6$t/yeK3nRcgJ7hbEG$l27hNpOe0mGVbbYwJ9Xg3y4IVnQwwo6no/srfc7bMIAMlL4u7N6AGbqj/wLR8LBa27EuVwopav6u4.WzV28KB1";
   };
   # given the users in this list the right to specify additional substituters via:
   #    1. `nixConfig.substituers` in `flake.nix`
   #    2. command line args `--options substituers http://xxx`
-  nix.settings.trusted-users = [username];
+  nix.settings.trusted-users = [ username ];
 
   # customise /etc/nix/nix.conf declaratively via `nix.settings`
   nix.settings = {
     # enable flakes globally
-    experimental-features = ["nix-command" "flakes"];
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
 
     substituters = [
       "https://cache.nixos.org"
@@ -99,7 +106,7 @@
   security.polkit.enable = true;
 
   services = {
-    dbus.packages = [pkgs.gcr];
+    dbus.packages = [ pkgs.gcr ];
     geoclue2.enable = true;
   };
 }

@@ -3,7 +3,8 @@
   pkgs,
   catppuccin-bat,
   ...
-}: {
+}:
+{
   home.packages = with pkgs; [
     # archives
     zip

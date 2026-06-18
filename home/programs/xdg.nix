@@ -1,5 +1,6 @@
-{config, ...}: let
-  browser = ["firefox.desktop"];
+{ config, ... }:
+let
+  browser = [ "firefox.desktop" ];
 
   # XDG MIME types
   associations = {
@@ -16,16 +17,17 @@
     "x-scheme-handler/https" = browser;
     "x-scheme-handler/unknown" = browser;
 
-    "audio/*" = ["mpv.desktop"];
-    "video/*" = ["mpv.desktop"];
-    "image/*" = ["imv.desktop"];
+    "audio/*" = [ "mpv.desktop" ];
+    "video/*" = [ "mpv.desktop" ];
+    "image/*" = [ "imv.desktop" ];
     "application/json" = browser;
-    "application/pdf" = ["org.pwmt.zathura.desktop.desktop"];
-    "x-scheme-handler/discord" = ["discordcanary.desktop"];
-    "x-scheme-handler/spotify" = ["spotify.desktop"];
-    "x-scheme-handler/tg" = ["telegramdesktop.desktop"];
+    "application/pdf" = [ "org.pwmt.zathura.desktop.desktop" ];
+    "x-scheme-handler/discord" = [ "discordcanary.desktop" ];
+    "x-scheme-handler/spotify" = [ "spotify.desktop" ];
+    "x-scheme-handler/tg" = [ "telegramdesktop.desktop" ];
   };
-in {
+in
+{
   xdg = {
     enable = true;
     cacheHome = config.home.homeDirectory + "/.local/cache";
