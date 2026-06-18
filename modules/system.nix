@@ -7,11 +7,12 @@
 }: {
   # ============================= User related =============================
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account.
   users.users.${username} = {
     isNormalUser = true;
     description = "${userName}";
     extraGroups = ["networkmanager" "wheel"];
+    hashedPassword = "$6$t/yeK3nRcgJ7hbEG$l27hNpOe0mGVbbYwJ9Xg3y4IVnQwwo6no/srfc7bMIAMlL4u7N6AGbqj/wLR8LBa27EuVwopav6u4.WzV28KB1";
   };
   # given the users in this list the right to specify additional substituters via:
   #    1. `nixConfig.substituers` in `flake.nix`
