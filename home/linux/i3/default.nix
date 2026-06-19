@@ -1,8 +1,4 @@
-{
-  pkgs,
-  config,
-  ...
-}:
+{ ... }:
 {
   # wallpaper, binary file
   # home.file.".config/i3/wallpaper.jpg".source = ../../wallpaper.jpg;

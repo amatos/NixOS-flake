@@ -8,6 +8,38 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- `flake.nix`: added `nix-darwin`, `determinate`, and `mac-app-util` flake
+  inputs (replacing the old `darwin`/`nixpkgs-darwin` inputs), and wired up
+  `darwinConfigurations.codex` with the Determinate nix-darwin module,
+  `mac-app-util`, and home-manager
+- `flake.nix`: added a top-level `darwinModules.determinateNixConfig` output
+  (imports `modules/macos/determinate-nix-core.nix`) and a `formatter` output
+  (`nixfmt`, per RFC 166) for `aarch64-darwin`, `x86_64-linux`, and
+  `aarch64-linux`
+- `modules/macos/nix-core.nix`: shared nix-darwin Nix settings (experimental
+  features, substituters, trusted public keys)
+- `modules/macos/system.nix`: shared nix-darwin system defaults (24-hour
+  clock, TouchID for sudo, zsh)
+- `modules/macos/host.nix`: templated hostname/computer-name/NetBIOS-name
+  module, parameterized by a `hostname` argument
+- `modules/macos/user.nix`: declares the primary macOS user account and adds
+  them to `nix.settings.trusted-users`
+- `modules/macos/apps.nix`: nix-darwin `environment.systemPackages` and
+  Homebrew (`taps`/`brews`/`casks`) configuration
+- `modules/macos/determinate-nix-core.nix`: enables Determinate Nix
+  (`determinateNix.enable = true`) with custom settings written to
+  `/etc/nix/nix.custom.conf`
+- `hosts/macos/codex/default.nix`: imports the new `modules/macos/*` modules
+  and `modules/common`
+- `home/macos/default.nix`: placeholder module for macOS-specific
+  home-manager config (currently empty)
+- `users/alberth/home-macos.nix`: macOS home-manager entry point — imports
+  `home/common` and `home/macos` only (no Linux-only desktop modules)
+- `README.md`: documented `darwin-rebuild switch --flake .#codex` as the
+  deploy command for the nix-darwin host, alongside the existing
+  `nixos-rebuild` instructions
+- `AGENTS.md`: noted that Linux hosts use standard Nix while macOS hosts use
+  Determinate Nix
 - `home/common/programs/tealdeer.nix`: added `tealdeer` configuration
 - `modules/common/shell.nix`: added `cowsay`, `fortune`, `fzf`, `htop`, `ripgrep`, `tealdeer`, `tmux`, `wget`, `yazi`, `zoxide`
 - `modules/linux/system.nix`: added `ghostty.terminfo` to `environment.systemPackages` to provide terminfo for `ghostty`
@@ -25,6 +57,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Changed
 
+- `users/alberth/home.nix` split per platform: renamed to
+  `users/alberth/home-linux.nix` (used by `gammu`/`xadrez`, unchanged
+  content) and added `users/alberth/home-macos.nix` (used by `codex`) so the
+  macOS host no longer pulls in Linux-only desktop modules
+  (`home/linux/i3`, `home/linux/rofi`, `home/linux/fcitx5`)
+- `flake.nix`: `nixosConfigurations.gammu`/`xadrez` no longer include
+  `determinate.nixosModules.default` — Linux hosts use standard NixOS Nix
+  management (`modules/linux/system.nix`'s `nix.settings`/`nix.gc`), only
+  macOS uses Determinate Nix
+- `flake.nix`: removed the now-unused `determinate` destructured output
+  argument (only `inputs.determinate.darwinModules.default` is referenced)
 - `users/alberth/home.nix`: moved `programs.fish.enable` and `programs.zsh.enable`
   here from `home/shell/atuin.nix` — shell choice is user-specific, not
   application-specific
@@ -60,6 +103,64 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - `home/common/shell/core.nix`: made `home.homeDirectory` platform-aware
   (`/Users/${username}` on Darwin via `pkgs.stdenv.isDarwin`, otherwise
   `/home/${username}`) now that this module is shared with the nix-darwin host
+
+### Fixed
+
+- `flake.nix`: moved `darwinModules` out of `darwinConfigurations` to be a
+  top-level flake output — it was nested inside `darwinConfigurations`,
+  so `self.darwinModules.*` couldn't resolve, and `nix flake show`/tooling
+  tried to evaluate it as if it were a system configuration
+- `flake.nix`: removed the `self.darwinModules.base` reference — no such
+  module was ever defined; `hosts/macos/codex` already pulls in everything
+  it needs via its own `imports`
+- `flake.nix`: fixed `darwinModules.determinateNixConfig`'s import path,
+  which pointed at the nonexistent `modules/macos/determinate-nix-config.nix`
+  (the real file is `modules/macos/determinate-nix-core.nix`)
+- `flake.nix`: fixed the `codex` home-manager module block, which set bare
+  `specialArgs`/`users.${username}` instead of
+  `home-manager.extraSpecialArgs`/`home-manager.users.${username}` — the
+  former would have written the home-manager config into the real
+  `users.${username}` system-user option instead of activating home-manager
+- `flake.nix`: added `hostname = "codex"` to `codex`'s `specialArgs`, since
+  `modules/macos/host.nix` requires a `hostname` argument that was never
+  supplied
+- `hosts/macos/codex/default.nix`: changed `modules = [...]` to
+  `imports = [...]` — `modules` is not a valid nix-darwin/NixOS option name
+- `hosts/macos/codex/default.nix`: fixed relative import paths from
+  `../../modules/macos/...` to `../../../modules/macos/...` — the host file
+  is three directories deep (`hosts/macos/codex/`), so two `../` resolved to
+  the nonexistent `hosts/modules/macos/...`
+- `modules/macos/determinate-nix-core.nix`: fixed a syntax error (stray
+  trailing semicolons after closing braces) that broke evaluation
+- `modules/macos/determinate-nix-core.nix`: dropped the unused `config`,
+  `pkgs`, and `lib` module arguments (flagged by `deadnix`) — none were
+  referenced in the module body
+- Repo-wide `deadnix` cleanup of other unused module arguments it flagged:
+  `home/linux/fcitx5/default.nix` (`config`, `pkgs`),
+  `home/linux/programs/media.nix` (`config`),
+  `home/linux/programs/browsers.nix` (`pkgs`, `config`),
+  `home/linux/rofi/default.nix` (`pkgs`, `config`),
+  `home/linux/i3/default.nix` (`pkgs`, `config`),
+  `users/alberth/home-macos.nix` (`pkgs`),
+  `users/alberth/home-linux.nix` (`pkgs`),
+  `modules/macos/system.nix` (`pkgs`),
+  `modules/linux/base-gui.nix` (`lib`, `username`, `userName`),
+  `modules/linux/no-gui.nix` (`pkgs`, `lib`, `username`, `userName`), and
+  `hosts/linux/{gammu,xadrez}/hardware-configuration.nix` (`pkgs`) — the
+  latter two are nixos-generate-config-managed files normally left
+  untouched, so this cosmetic fix will be reverted if they're regenerated
+- `modules/macos/nix-core.nix`: removed a duplicate, invalid
+  `determinateNixConfig = { determinateNix = {...}; }` attribute (not a real
+  nix-darwin option; duplicated `modules/macos/determinate-nix-core.nix`)
+- `modules/macos/nix-core.nix`: removed `nix.gc.automatic`/`nix.gc.options`,
+  which hard-failed the `nix.gc.automatic requires nix.enable` assertion
+  since Determinate Nix force-sets `nix.enable = false`; Determinate manages
+  its own garbage collection
+- `modules/macos/nix-core.nix`: dropped the now-unused `lib`/`config`
+  module arguments
+- `README.md`: added a missing blank line after the "How to install
+  nix-darwin and Deploy this Flake?" heading, fixing a `markdownlint`
+  MD022 violation that blocked the pre-commit hook
 
 ## [2026.06.18] - 2026-06-18
 

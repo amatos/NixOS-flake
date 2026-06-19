@@ -14,6 +14,8 @@ configurations in `modules/common`, `modules/linux`, and `modules/darwin`.
 Home-manager configuration is stored in `users/`, which reference modular
 configurations in `home/linux`, `home/common`, and `home/darwin`.
 
+Linux hosts use standard Nix; macOS hosts use Determinate Nix.
+
 ## Where changes belong
 
 - **`users/<name>/`** — user-specific configuration (e.g. which modules a user

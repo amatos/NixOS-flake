@@ -1,5 +1,4 @@
 {
-  pkgs,
   userName,
   userEmail,
   ...
@@ -13,10 +12,7 @@
 
   imports = [
     ../../home/common
-    ../../home/linux/fcitx5
-    ../../home/linux/i3
-    ../../home/linux/programs
-    ../../home/linux/rofi
+    ../../home/macos
   ];
 
   programs.fish.enable = true;
